@@ -30,7 +30,7 @@ The whole data processing pipeline is based on data lake design. The reason to c
     1. If we want to analyze relationship between immigration and destination city demographics, we can create an analytics table by joining `immigration` table with `demographics` table
     2. If we want to explore relationship between immigration and tranportation convenience of destination city, we can create an analytics table by joining `immigration` table with `airport` table
 ![alt text](img/data_model.png)
-Tables are normalized for the benefits of efficient data updates. Please see data dictionary in the `data_dictionary` folder for the table field description.
+Please see data dictionary in the `data_dictionary` folder for the table field description.
 
 ## ETL Pipeline
 ![alt text](img/data_pipeline.png)
