@@ -42,7 +42,7 @@ df_immigration = spark.read.format("com.github.saurfang.sas.spark")\
 
 df_immigration_transformed = df_immigration.selectExpr('cast(cicid as int)', 'cast(i94yr as int) as entry_year',
              'cast(i94mon as int) as entry_month', 'cast(i94res as int) as origin_country_code', 
-             'i94port as destination_port_code', 'cast(i94mode as int)', 'i94bir as age', 'gender', 'visatype')
+             'i94port as entry_port_code', 'cast(i94mode as int)', 'i94bir as age', 'gender', 'visatype')
 
 
 df_immigration_transformed.write.partitionBy('entry_year', 'entry_month').parquet(S3_HEADER+S3_BUCKET+'/transformed_data/immigration')

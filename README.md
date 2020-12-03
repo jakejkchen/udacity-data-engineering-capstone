@@ -17,7 +17,7 @@ The whole data processing pipeline is based on data lake design. The reason to c
 
 ## Data Model
 ![alt text](img/data_model.png)
-Tables are normalized for the benefits of efficient data updates
+Tables are normalized for the benefits of efficient data updates. Please see data dictionary in the `data_dictionary` folder for the table field description.
 
 ## ETL Pipeline
 ![alt text](img/data_pipeline.png)

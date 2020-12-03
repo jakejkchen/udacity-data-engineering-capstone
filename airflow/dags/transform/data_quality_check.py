@@ -38,13 +38,18 @@ def create_spark_session():
 spark = create_spark_session()
 
 def data_quality_check():
+    null_checks = {'airport': 'city',
+            'demographics': 'city',
+            'immigration': 'entry_port_code',
+            'temperature': 'city'}
+    
     for table in table_ref.keys():
         file_path = S3_HEADER + S3_BUCKET + S3_DATA_FOLDER + table_ref.get(table)
         df = spark.read.parquet(file_path)
-        if len(df.columns) > 0 and df.count() > 0:
-            print(f"{table} data quality check succeeded")
-        else:
-            raise ValueError(f"{table} data quality check failed")
+        if len(df.columns) < 0 or df.count() < 0:
+            raise ValueError(f"{table} data quality check failed. Table returned no results")
+        if df.filter(df[null_checks.get(table)].isNull()).count() > 0:
+            raise ValueError(f"{table} data quality check failed. Table contained null city rows")
             
 data_quality_check()
         
