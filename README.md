@@ -1,5 +1,5 @@
 # Project Summary
-The project follows the following steps:
+This project follows the following steps:
 * Step 1: Scope the Project and Gather Data
 * Step 2: Explore and Assess the Data
 * Step 3: Define the Data Model
