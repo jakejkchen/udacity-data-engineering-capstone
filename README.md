@@ -1,16 +1,24 @@
-# Project Description
+# Project Summary
+The project follows the following steps:
+* Step 1: Scope the Project and Gather Data
+* Step 2: Explore and Assess the Data
+* Step 3: Define the Data Model
+* Step 4: Run ETL to Model the Data
+
+# Step 1: Scope the Project and Gather Data
+##  Project Description
 - Each year a great number of people come to the US with differnt VISA types. It's interesting to see if there are some trends in the destination cities they would like to go
 - The aim of this project is to create an ETL pipeline to generate a set of tables so that analysts can use to explore and answer questions, sucha as:
   * Which city attracts the most student/business/immigration visa holders
   * The relationship between the number of immigrants and the features of the city, e.g. weather, demographics, and airport numbers
 
-# Data Sources
+## Data Sources
 - I94 Immigration Data: This data comes from the US National Tourism and Trade Office. Here's the [Link](https://travel.trade.gov/research/reports/i94/historical/2016.html)
 - World Temperature Data: This dataset came from Kaggle. You can read more details from [here](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data)
 - U.S. City Demographic Data: This data comes from OpenSoft. You can read more details from [here](https://public.opendatasoft.com/explore/dataset/us-cities-demographics/export/)
 - Airport Code Table: This is a simple table of airport codes and corresponding cities. You can read more details from [here](https://datahub.io/core/airport-codes#data)
 
-# Data Pipeline Design
+## Data Pipeline Design
 The whole data processing pipeline is based on data lake design. The reason to choose data lake is due to its flexibility in altering schema and avoid the burden of maintaing a database.
 
 ## Infrastructure Setup
@@ -18,6 +26,10 @@ The whole data processing pipeline is based on data lake design. The reason to c
 - Spark is chosed as the data processing engine due to its parallel processing nature and the flexibility to scale up when data size is increased dramatically
 - Airflow is used as the data pipeline orchestarting tool. The nature of task dependencies within a DAG (Directed Acyclic Graph) in Airflow allows easy monitoring of data pipeline
 
+# Step 2: Explore and Assess the Data
+Please see the jupyter notebook for data exploration
+
+# Step 3: Define the Data Model
 ## Data Model
 - A star shema is choosen as the data model due to its benefits of using denormalized tables, simplifying queries and fast aggregations. Following is the list of tables generated:
     1. Denormalized `immigration` table: it has information about the origin country and the entry port, and it also contains basic information of visa holders, like age, gender, and visa type
@@ -32,8 +44,14 @@ The whole data processing pipeline is based on data lake design. The reason to c
 ![alt text](img/data_model.png)
 Please see data dictionary in the `data_dictionary` folder for the table field description.
 
-## ETL Pipeline
+# Step 4: Run ETL to Model the Data
+* In the machine that has Airflow installed, start the Airflow by execute the following bash script:
+```
+start_airflow.sh
+```
+* Once the Airflow is up, there's a DAG called `sparkify_etl` and it has an ETL pipeline as below:
 ![alt text](img/data_pipeline.png)
+* Start the DAG and wait for all the tasks to be completed
 
 # Follw-up Questions
 1. The data was increased by 100x
